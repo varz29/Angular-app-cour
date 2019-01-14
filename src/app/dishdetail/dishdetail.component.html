@@ -21,9 +21,13 @@
         <button mat-button [routerLink]="['/dishdetail', next]"><span class="fa fa-chevron-right fa-lg"></span></button>
       </mat-card-actions>
     </mat-card>
-    <div [hidden]="dish">
+    <div [hidden]="dish || errMess">
       <mat-spinner></mat-spinner>
       <h4> Loading . . . Please Wait</h4>
+    </div>
+    <div fxFlex *ngIf="errMess">
+      <h2>Error</h2>
+      <h4>{{errMess}}</h4>
     </div>
   </div>
 
@@ -43,9 +47,13 @@
         <p matLine>--{{author}}</p>
       </mat-list-item>
     </mat-list>
-    <div [hidden]="dish">
+    <div [hidden]="dish || errMess">
       <mat-spinner></mat-spinner>
       <h4> Loading . . . Please Wait</h4>
+    </div>
+    <div fxFlex *ngIf="errMess">
+      <h2>Error</h2>
+      <h4>{{errMess}}</h4>
     </div>
 
     <form novalidate [formGroup]="commentForm" #fform="ngForm" (ngSubmit)="onSubmit()">

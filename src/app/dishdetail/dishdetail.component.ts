@@ -22,8 +22,8 @@ export class DishdetailComponent implements OnInit {
   author;
   rating;
   comment;
-  months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  errMess: string;
+
 
   formErrors = {
     'author': '',
@@ -53,11 +53,13 @@ export class DishdetailComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
+    this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds,
+      errmess => this.errMess = <any>errmess);
     this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
       .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
     this.dishService.getDish(id)
-      .subscribe((dish) => (this.dish = dish));
+      .subscribe((dish) => (this.dish = dish,
+        errmess => this.errMess = <any>errmess));
   }
 
   createForm() {
