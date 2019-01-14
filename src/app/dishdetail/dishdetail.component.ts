@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Dish } from '../shared/dish';
 import { Comment } from '../shared/comment'
 import { Params, ActivatedRoute } from '@angular/router';
@@ -46,7 +46,7 @@ export class DishdetailComponent implements OnInit {
 
 
 
-  constructor(private dishService: DishService, private route: ActivatedRoute, private location: Location, private fb: FormBuilder) {
+  constructor(private dishService: DishService, private route: ActivatedRoute, private location: Location, private fb: FormBuilder, @Inject('BaseURL') private baseURL) {
     this.createForm();
 
   }
@@ -77,6 +77,7 @@ export class DishdetailComponent implements OnInit {
     this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
     this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
   }
+
   onValueChanged(data?: any) {
     console.log(this.commentForm);
     this.comment = this.commentForm.get('comment').value;
@@ -112,7 +113,6 @@ export class DishdetailComponent implements OnInit {
       'date': dateISO
     }
     this.dish.comments.push(newcomment);
-
     this.commentForm.reset();
     this.commentForm.reset({
       'author': '',
