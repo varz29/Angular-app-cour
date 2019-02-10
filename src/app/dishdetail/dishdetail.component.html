@@ -1,8 +1,8 @@
-<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.gt-md="space-around center"
-  fxLayoutGap="10px" fxLayoutGap.xs="0">
+<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"
+  fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px" fxLayoutGap.xs="0">
 
   <div fxFlex="40">
-    <mat-card *ngIf="dish">
+    <mat-card *ngIf="dish" [@visibility]="visibility">
       <mat-card-header>
         <mat-card-title>
           <h3 *ngIf="dish">{{dish.name|uppercase}}</h3>
@@ -33,7 +33,7 @@
 
   <div fxFlex="40">
 
-    <mat-list *ngIf="dish">
+    <mat-list *ngIf="dish" [@visibility]="visibility">
       <h1 matLine>Comments</h1>
 
       <mat-list-item *ngFor="let comment of dish.comments">
@@ -72,7 +72,8 @@
           <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
         </mat-form-field>
       </p>
-      <button type="submit" [disabled]="fform.form.invalid" mat-button class="background-primary text-floral-white">Submit</button>
+      <button type="submit" [disabled]="fform.form.invalid" mat-button
+        class="background-primary text-floral-white">Submit</button>
     </form>
   </div>
 </div>
